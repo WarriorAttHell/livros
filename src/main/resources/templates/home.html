@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<i class="oi oi-caret-right"></i>
+						<span>Home</span>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		
+		<section class="container">
+            <h1 class="text-center">Apoio</h1>
+            <div class="row text-center">
+                <div class="col-5">
+                    <div class="card">
+                        <img class="card-img-top" th:src="@{/imagens/logo_fapesc.png}">
+                        <div class="card-body">
+                          <a href="https://fapesc.sc.gov.br/" class="btn btn-info" target="_blank">
+	                          <h5 class="card-title">Fapesc</h5>
+                          </a>
+                          <p class="card-text mt-2">Fundação de Amparo à Pesquisa e Inovação do Estado de Santa Catarina</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card " >
+                        <img class="card-img-top" th:src="@{/imagens/logo_unoesc.jpg}">
+                        <div class="card-body">
+                          <a href="https://unoesc.edu.br/" class="btn btn-info" target="_blank">
+	                          <h5 class="card-title">Unoesc</h5>
+                          </a>
+                          <p class="card-text mt-2">Universidade do Oeste de Santa Catarina</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card" width="100px">
+                        <img class="card-img-top" th:src="@{/imagens/spring-logo.svg}">
+                        <div class="card-body">
+                          <a href="https://spring.io/" class="btn btn-info" target="_blank">
+	                          <h5 class="card-title">Spring</h5>
+                          </a>
+                          <p class="card-text mt-2"><em>Framework</em> Spring</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+	</section>	
+</body>
+</html>

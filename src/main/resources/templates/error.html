@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" th:href="@{/imagens/favicon.png}">
+
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script type="text/javascript" th:src="@{/webjars/jquery/3.6.3/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script> 
+<link href="/css/style.css" rel="stylesheet">
+<title th:text="${status}"></title>
+</head> 
+<body class="text-center">
+<div>
+<h1 class="h3 mb-3 font-weight-normal">
+<i class="oi oi-warning"></i> 
+<span th:text="${status}"></span>
+</h1>
+<h2 th:text="${error}"></h2>
+<div>
+<span th:text="${message}"></span><br/><br/>
+<a class="btn btn-primary" type="button" href="javascript:history.back()">Voltar para a página anterior</a>
+</div>
+</div>
+</body>
+</html> 

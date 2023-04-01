@@ -1,0 +1,106 @@
+/* Estrutura base */
+html, body {
+	height: 100%;
+}
+
+body {
+	padding-top: 55px;
+} 
+
+/* Layout principal */
+.layout-main {
+    display: flex;
+}
+
+/* Conteúdo */
+.layout-content {
+    width: 100%;
+    min-width: 1000px;
+}
+
+.container {
+	width: 100%;
+}
+
+/* Rodapé */
+.layout-rodape {
+	position: fixed;
+	right: 10px;
+	bottom: 0;
+	height: 30px;
+	padding-top: 1px;
+	border-top: 1px solid #eeeeee;
+}
+
+.rodape {
+ 	font-size: 85%; 
+	color: #777777;
+	text-align: right;
+}
+
+/* Barra lateral */
+.sidebar {
+    height: 91vh;
+    border-top: 1px solid #eee;
+    border-right: 1px solid #eee;    
+    background-color: #f8f9fa;
+}
+
+.sidebar .nav-item {
+	width: 100%;
+}
+
+.sidebar .nav-link {
+	border-radius: 0;
+} 
+
+.sidebar ul li:hover a, .menu ul li.active a {
+    color: #777777;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 10px 0px;
+}
+
+.sidebar ul li a {
+    display: block;
+    color: #1a1a1a;
+    padding: 10px 15px;
+    white-space: nowrap;
+}
+
+.sidebar.sidebar-open {
+    width: 250px;
+}
+
+/* Navbar */
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+	color: #fff;
+	background-color: #1e94d2;
+}
+
+.navbar-collapse {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar-toggle {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+/* Formulário de busca */
+.busca input {
+	border: 2px solid #d6d4d4;
+}
+
+.busca input:focus {
+	box-shadow: none;
+	border: 1px solid grey;
+}
+
+.tamanho-select {
+	padding: 6px 12px;
+	border-radius: 0.25rem;
+}

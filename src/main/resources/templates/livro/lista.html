@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item active">
+						<i class="oi oi-caret-right"></i>
+						Lista de Livros
+					</li>
+				</ul>
+				<a class="btn btn-primary btn-md" href="/livros/cadastrar">
+					<span class="oi oi-plus"></span>
+					Novo Livro
+				</a>
+			</div>
+		</nav>
+	
+		<div class="container-fluid mt-3" style="box-sizing: border-box;">
+			<div th:replace="~{fragments/alert}"></div>
+		
+			<form th:action="@{/livros/listar}" id="formBusca">
+				<div class="d-flex p-3 bg-secondary justify-content-between">
+					<div class="col-5">
+						<div class="input-group busca">
+							<i class="input-group-text fa fa-search pt-2"></i> 
+							<input id="palavraChave" type="search" name="titulo" th:value="${titulo}" class="form-control" placeholder="Entre com o título">
+							<button type="submit" class="btn btn-primary">Buscar</button>
+						</div>
+					</div>
+
+					<div class="col-5">
+						<div class="input-group justify-content-center">
+							<label class="input-group-text" for="tamPagina">Registros por página:</label>
+							
+							<select form="formBusca" name="tamPagina" th:value="${tamanhoPagina}" class="tamanho-select" id="tamPagina">
+								<option th:each="s : ${ {2, 4, 6, 8, 12} }" 
+										th:value="${s}" 
+										th:text="${s}" 
+										th:selected="${s == tamanhoPagina}">
+									2
+								</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-2 text-end">
+						<button id="btnLimpar" class="btn btn-danger">Limpar</button>
+					</div>
+				</div>
+			</form>
+
+			<div class="table-responsive">
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th class="col-1">
+								<a th:href="@{'/livros/listar?pagina=0&ordenacao=id&direcao=' + ${direcaoReversa}} + '&titulo=' + ${titulo} + '&tamPagina=' + ${tamanhoPagina}">
+									Id
+								</a>
+							</th>
+							<th class="col-4">
+								<a th:href="@{'/livros/listar?pagina=0&ordenacao=titulo&direcao=' + ${direcaoReversa}} + '&titulo=' + ${titulo} + '&tamPagina=' + ${tamanhoPagina}">
+									Título
+								</a>
+							</th>
+							<th class="col-1">
+								<a th:href="@{'/livros/listar?pagina=0&ordenacao=paginas&direcao=' + ${direcaoReversa}} + '&titulo=' + ${titulo} + '&tamPagina=' + ${tamanhoPagina}">
+									# Páginas
+								</a>	
+							</th>
+							<th class="col-4">
+								<a th:href="@{'/livros/listar?pagina=0&ordenacao=autor&direcao=' + ${direcaoReversa}} + '&titulo=' + ${titulo} + '&tamPagina=' + ${tamanhoPagina}">
+									Autor
+								</a>
+							</th>
+							<th class="col-2">Ação</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="livro : ${pagina.content}">
+							<td th:inline="text">[[${livro.id}]]</td>
+							<td th:text="${livro.titulo}">Senhor dos Anéis</td>
+							<td><span th:text="${livro.paginas}">42</span></td>
+							<td th:text="${livro.autor}">Tolkien</td>
+							<td>
+								<a class="btn btn-info btn-sm" th:href="@{/livros/editar/{id}(id=${livro.id})}" role="button"> 
+									<span class="oi oi-brush" title="Editar" aria-hidden="true"></span>							
+								</a>
+								
+								<button type="button" th:id="@{/livros/excluir/{id}(id=${livro.id})}" th:data-id="${livro.id}" th:data-titulo="${livro.titulo}" class="btn btn-danger btn-sm btn-excluir" data-bs-toggle="modal" data-bs-target="#meuModal">
+									<span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div th:replace="~{fragments/modal :: modal}"></div>
+			
+			<p>
+				Total de registros: [[${pagina.totalElements}]]  
+			</p>
+			
+			<nav aria-label="Page navigation example" th:if="${pagina.totalPages > 1}">
+				<ul class="pagination justify-content-center">
+					<li th:class="${pagina.number == 0} ? 'page-item disabled' : 'page-item'">
+						<a class="page-link" th:href="@{/livros/listar(pagina=${pagina.getNumber() - 1}, ordenacao=${campoOrdenacao}, direcao=${direcaoOrdenacao}, titulo=${titulo}, tamPagina=${tamanhoPagina})}">Anterior</a>
+					</li>
+					
+					<th:block th:each="numPagina: ${#numbers.sequence(1, pagina.totalPages)}">
+						<li class="page-item" th:classappend="${numPagina == pagina.number + 1} ? 'active' : ''">
+						 	<a class="page-link" 
+								th:href="@{/livros/listar(tamPagina=${pagina.size}, pagina=${numPagina - 1}, ordenacao=${campoOrdenacao}, direcao=${direcaoOrdenacao}, titulo=${titulo}, tamPagina=${tamanhoPagina})}" 
+								th:text=${numPagina}>
+							</a> 
+						</li>
+					</th:block>
+					
+					<li th:class="${pagina.number == pagina.totalPages-1} ? 'page-item disabled' : 'page-item'">
+						<a class="page-link" th:href="@{/livros/listar(pagina=${pagina.getNumber() + 1}, ordenacao=${campoOrdenacao}, direcao=${direcaoOrdenacao}, titulo=${titulo}, tamPagina=${tamanhoPagina})}">Próximo</a>
+					</li>
+				</ul>
+				<div class="text-center" th:text="|Página ${pagina.number + 1} de ${pagina.totalPages}|"></div>
+			</nav>
+		</div>
+		
+		<script>
+			$(document).ready(function() {
+				$("#btnLimpar").on("click", function(e) {
+					e.preventDefault();
+					
+					$("#palavraChave").text("");
+					window.location = "[[@{/livros/listar}]]";
+				});
+	
+				$("#tamPagina").on("change", function(e) {
+					$("#formBusca").submit();
+				});
+				
+				let url = '';
+				$('.btn-excluir').click(function() {
+					console.log($(this));
+					
+					console.log($(this).attr('id'));
+					url = 'http://localhost:8080' + $(this).attr('id');
+					
+					let id = $(this).data('id');
+					let titulo = $(this).data('titulo');
+					let texto = `Clique em Ok para excluir o registro "<strong>${id} - ${titulo}</strong>..."`;
+					
+					$('.modal-body').html(texto);
+				});
+				
+				$('#ok_confirm').click(function() {
+					document.location.href = url;
+				});
+			});
+		</script>
+	</section>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<div th:if="${#fields.hasAnyErrors()}" th:fragment="validacao">
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			<div th:each="error : ${#fields.detailedErrors()}">
+				<i class="oi oi-check"></i>
+				<span>
+					<strong th:text="${error.message}"></strong> 
+				</span>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+				</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

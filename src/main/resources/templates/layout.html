@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR" 
+	  xmlns:th="https://www.thymeleaf.org"
+	  xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8">
+	<title>Spring Boot : Livros</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="icon" th:href="@{/imagens/favicon.png}">
+
+	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css}"/>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+	<script type="text/javascript" th:src="@{/webjars/jquery/3.6.3/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>	
+	
+	<link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+	<header th:replace="~{fragments/header :: cabecalho}">
+		<div>Cabeçalho</div>
+	</header>
+	
+	<div class="layout-main">
+		<aside>
+			<nav th:replace="~{fragments/sidebar :: nav-sidebar}">
+				<span>menu</span>
+			</nav>
+		</aside>
+		
+		<section layout:fragment="corpo">
+			<div>Conteúdo principal</div>
+		</section>
+	</div>
+	
+	<footer th:replace="~{fragments/footer :: rodape}">
+		<div>Rodapé</div>
+	</footer>
+	
+	<script>
+		$(document).ready(function() {
+			setTimeout(() => {
+				$(".alert").fadeOut("slow", function() {
+					$(this).alert('close');
+				});
+			}, 3000);
+		});	
+	</script>
+</body>
+</html>

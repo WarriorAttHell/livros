@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item active">
+						<i class="oi oi-caret-right"></i>
+						Cadastrar Livro
+					</li>
+				</ul>
+				<a class="btn btn-primary btn-md" href="/livros/listar">
+					<span class="oi oi-spreadsheet"></span>
+					Listar Livros
+				</a>
+			</div>
+		</nav>
+	
+		<div class="container-fluid">
+			<h1 class="h5 fw-bold mt-2">Formulário de Cadastro de Livros</h1>
+			
+			<hr>
+			
+			<form th:object="${livroDTO}" method="POST" th:action="${livroDTO.id == null} ? @{/livros/salvar} : @{/livros/editar}">
+				
+				<div th:replace="~{fragments/validacao :: validacao}"></div>
+				
+				<div class="row g-2 p-2 mb-3">
+					<div class="form-floating">
+						<input type="text" class="form-control pb-2" id="titulo" th:field="*{titulo}" th:classappend="${#fields.hasErrors('titulo')} ? 'is-invalid'"
+						required autofocus placeholder="Entre com o título do livro">
+						<label for="titulo" class="pt-2 ps-4">Título</label>
+						
+						<div class="ivalid-feedback">
+							<span th:errors="*{titulo}"></span>
+						</div>
+					</div>
+					
+					<div class="form-floating">
+						<input type="number" class="form-control pb-2" id="paginas" th:field="*{paginas}" required placeholder="Entre com o número de páginas do livro">
+						<label for="paginas" class="pt-2 ps-4"># de páginas</label>
+					</div>
+					
+					<div class="form-floating">
+						<input type="text" class="form-control pb-2" id="autor" th:field="*{autor}" required placeholder="Entre com o nome do autor do livro">
+						<label for="autor" class="pt-2 ps-4">Autor</label>
+					</div>
+				</div>
+				
+				<input type="hidden" id="id" th:field="*{id}">
+				<input type="submit" class="btn btn-primary" th:value="${livroDTO.id == null} ? 'Incluir' : 'Salvar'">
+				<input type="button" class="btn btn-danger" value="Cancelar" th:onclick="window.location=[[@{/livros/listar}]]">
+			</form>
+		</div>
+	</section>
+</body>
+</html>
+
+
+
+
+
+
