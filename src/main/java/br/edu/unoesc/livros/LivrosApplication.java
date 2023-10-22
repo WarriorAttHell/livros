@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import br.edu.unoesc.livros.model.Livro;
@@ -30,10 +31,12 @@ public class LivrosApplication {
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**")
-						.allowedOrigins("*")
-						.allowedMethods("GET", "POST", "PUT", "DELETE");
+			public void addResourceHandlers(ResourceHandlerRegistry registry) {
+			    registry.addResourceHandler("swagger-ui.html")
+			      .addResourceLocations("classpath:/META-INF/resources/");
+
+			    registry.addResourceHandler("/webjars/**")
+			      .addResourceLocations("classpath:/META-INF/resources/webjars/");
 			}
 		};
 	}

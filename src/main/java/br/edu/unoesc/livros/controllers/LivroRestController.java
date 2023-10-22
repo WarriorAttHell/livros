@@ -35,7 +35,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@Api(value = "API REST de Funcionários")
+@Api(value = "API REST de Livros")
 @ApiResponses(value = {
     @ApiResponse(code = 200, message = "Operação realizada com sucesso"),
     @ApiResponse(code = 401, message = "Não autorizado"),
@@ -43,7 +43,7 @@ import io.swagger.annotations.ApiResponses;
     @ApiResponse(code = 404, message = "Funcionário não encontrado"),
     @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 })
-@RequestMapping("/api/livros")
+@RequestMapping("/api")
 public class LivroRestController {
 	private Logger logger = Logger.getLogger(LivroRestController.class.getName()); 
 	
